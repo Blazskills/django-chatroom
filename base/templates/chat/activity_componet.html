@@ -1,0 +1,23 @@
+<h3>Recent Activity</h3>
+      
+{% for message in room_message  %}
+
+<div><hr>
+    <small>
+    <a href="{% url 'profile-page'  message.user.id %}"><span>@{{ message.user }} </span> </a> {{ message.created|timesince }}
+    </small>
+    <p>Replied to "{{message.room.topic}}"</p>
+    <h3>{{ message }}</h3>
+</div>
+{% if request.user == message.user %}
+<a href="{% url 'delete-message' message.id %}">Delete</a>
+<a href="{% url 'update-message' message.id %}">Edit</a>
+{% elif request.user.is_superuser == True %}
+
+<a href="{% url 'delete-message' message.id %}">Delete</a>
+<a href="{% url 'update-message' message.id %}">Edit</a>
+{% endif %}
+<hr>
+{% endfor %}
+<hr>
+</div>

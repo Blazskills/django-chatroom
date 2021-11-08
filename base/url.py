@@ -9,9 +9,12 @@ urlpatterns = [
     path('logout/', views.LogoutUser, name='logout'),
     path('', views.home, name='home'),
     path('room/<str:pk>/', views.room, name='room'),
+    path('profile/<str:pk>/', views.ProfilePage, name='profile-page'),
     path('create-room/', views.CreateRoom, name="create-room"),
     path('update-room/<str:pk>/', views.UpdateRoom, name="update-room"),
-    path('Delete-room/<str:pk>/', views.DeleteRoom, name="delete-room")
+    path('update-message/<str:pk>/', views.UpdateMessage, name="update-message"),
+    path('Delete-room/<str:pk>/', views.DeleteRoom, name="delete-room"),
+    path('Delete-message/<str:pk>/', views.DeleteMessage, name="delete-message")
 
 
 ]
