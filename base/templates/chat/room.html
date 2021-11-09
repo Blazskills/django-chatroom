@@ -9,6 +9,11 @@
         display: grid;
         grid-template-columns: 3fr 1fr;
     }
+
+
+    input[name=body2] {
+        pointer-events: none;
+      }
 </style>
 <div class="room-container">
 
@@ -49,6 +54,16 @@
         </form>
         
         </div>
+        {% else %}
+        <div class="comment-form"> 
+            <form action="" method="post">
+                {% csrf_token %}
+    
+                <input type="text" name="body2" placeholder="Write Your message here...">
+            </form>
+            
+            </div>
+        <a href="{% url 'login' %}">Kindly login to comment</a>
         <br><br><br>
     {% endif %}
 </div>

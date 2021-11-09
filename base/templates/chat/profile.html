@@ -5,10 +5,11 @@
 
 
 
+{% if rooms %}
+<h2>ALL {{ msg2 }} Rooms Created </h2>
 
 {% for room in rooms %}
 <div>
-
 {% if request.users.id == room.host.id %}
 <a href="{% url 'update-room' room.id %}">Edit</a>
 <a href="{% url 'delete-room' room.id %}">Delete</a>
@@ -22,6 +23,9 @@
 </div>
 
 {% endfor %}
+{% endif %}
+    
+
 
 
 
@@ -29,10 +33,10 @@
 <hr>
 
 {% if  room_msg %}
-        
+<h2>All {{msgz}}  Comments on various room</h2>
 {% for room_msg in room_msg %}
-<div>
 
+<div>
 {% if request.users.id == room_msg.user.id %}
 <a href="{% url 'update-room' room_msg.user.id %}">Edit</a>
 <a href="{% url 'delete-room' room_msg.user.id %}">Delete</a>

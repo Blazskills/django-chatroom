@@ -75,13 +75,18 @@ def home(request):
     return render (request, 'chat/index.html',context)
 
 
-
+@login_required(login_url='/login')
 def ProfilePage(request,pk):
     users = User.objects.get(id=pk)
     rooms =users.room_set.all()
     room_msg =users.message_set.all()
-    print(room)
-    context ={'users':users, 'rooms':rooms, 'room_msg': room_msg}
+    msgz=''
+    msg2=''
+    for room_msgs in room_msg:
+        msgz = room_msgs.user.username
+    for  room in rooms:
+        msg2=room.host.username
+    context ={'users':users, 'rooms':rooms, 'room_msg': room_msg, 'msgz':msgz, 'msg2':msg2}
     return render(request, 'chat/profile.html', context)
 
 
@@ -114,8 +119,10 @@ def CreateRoom(request):
     if request.method == 'POST':
         form =RoomForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('home')
+           room=  form.save(commit=False)
+           room.host=request.user
+           room.save()
+           return redirect('home')
     context={'form':form}
     return render(request, 'chat/room_form.html', context)
 
