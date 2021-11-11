@@ -13,8 +13,12 @@ urlpatterns = [
     path('create-room/', views.CreateRoom, name="create-room"),
     path('update-room/<str:pk>/', views.UpdateRoom, name="update-room"),
     path('update-message/<str:pk>/', views.UpdateMessage, name="update-message"),
+    path('update-user/', views.UpdateUser, name="update-user"),
     path('Delete-room/<str:pk>/', views.DeleteRoom, name="delete-room"),
-    path('Delete-message/<str:pk>/', views.DeleteMessage, name="delete-message")
+    path('Delete-message/<str:pk>/', views.DeleteMessage, name="delete-message"),
+    path('topics', views.TopicsPage, name="topics"),
+    path('activity', views.ActivityPage, name="activity")
+
 
 
 ]
