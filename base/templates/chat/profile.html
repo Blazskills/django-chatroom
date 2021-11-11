@@ -1,65 +1,56 @@
-{% extends './main.html' %}
 
+
+
+
+{% extends 'chat/main.html' %}
 
 {% block content %}
 
 
+  <main class="profile-page layout layout--3">
+    <div class="container">
+      <!-- Topics Start -->
+      {% include './topics_componet.html' %}
 
-{% if rooms %}
-<h2>ALL {{ msg2 }} Rooms Created </h2>
+      <!-- Topics End -->
 
-{% for room in rooms %}
-<div>
-{% if request.users.id == room.host.id %}
-<a href="{% url 'update-room' room.id %}">Edit</a>
-<a href="{% url 'delete-room' room.id %}">Delete</a>
-{% endif %}
+      <!-- Room List Start -->
+      <div class="roomList">
+        <div class="profile">
+          <div class="profile__avatar">
+            <div class="avatar avatar--large active">
+              <img src="https://randomuser.me/api/portraits/men/11.jpg" />
+            </div>
+          </div>
+          <div class="profile__info">
+            <h3>{{users.first_name}} {{users.last_name}}</h3>
+            <p>@{{msgz}}</p>
+            <a href="edit-user.html" class="btn btn--main btn--pill">Edit Profile</a>
+          </div>
+          <div class="profile__about">
+            <h3>About</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur illo tenetur
+              facilis sunt nemo debitis quisquam hic atque aut? Ducimus alias placeat optio
+              accusamus repudiandae quis ab ex exercitationem rem?
+            </p>
+          </div>
+        </div>
 
-    <span>  @{{ room.host.username }}  </span>
-    <h5>{{ room.id }}-- <a href=" {% url 'room' room.id %} ">{{ room.name }}</a> </h5> 
-    <small>{{ room.topic.name }}</small>
-    <hr>
+        <div class="roomList__header">
+          <div>
+            <h2>Study Rooms Hosted by  {{users.first_name}} {{users.last_name}} </a>
+            </h2>
+          </div>
+        </div>
+        {% include 'chat/feed_componet.html' %}
+      </div>
+      <!-- Room List End -->
 
-</div>
+      <!-- Activities Start -->
+      {% include 'chat/activity_componet.html' %}
+      <!-- Activities End -->
+    </div>
+  </main>
 
-{% endfor %}
-{% endif %}
-    
-
-
-
-
-
-<hr>
-
-{% if  room_msg %}
-<h2>All {{msgz}}  Comments on various room</h2>
-{% for room_msg in room_msg %}
-
-<div>
-{% if request.users.id == room_msg.user.id %}
-<a href="{% url 'update-room' room_msg.user.id %}">Edit</a>
-<a href="{% url 'delete-room' room_msg.user.id %}">Delete</a>
-{% endif %}
-
-    <span>  Room Name:<h3>  {{ room_msg.room.name }}  </h3>  </span>
-    <small>Commented  Message: <strong>{{ room_msg.body}}</small> </strong> 
-    <hr>
-
-</div>
-
-{% endfor %}
-{% else %}
-<strong>
-    {{  room_msg.user.username }} has bot commented on any room before. If he does, you'll definatly see it here. Kindly check back for an updated activity from this user.
-</strong>
-{% endif %}
-
-
-
-        
-{% endblock content %}
-
-
-
-    
+  {% endblock content %}

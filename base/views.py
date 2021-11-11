@@ -75,20 +75,21 @@ def home(request):
     return render (request, 'chat/index.html',context)
 
 
-@login_required(login_url='/login')
+
+# @login_required(login_url='/login')
 def ProfilePage(request,pk):
     users = User.objects.get(id=pk)
     rooms =users.room_set.all()
-    room_msg =users.message_set.all()
+    topics = Topic.objects.all()
+    room_message =users.message_set.all()
     msgz=''
     msg2=''
-    for room_msgs in room_msg:
+    for room_msgs in room_message:
         msgz = room_msgs.user.username
     for  room in rooms:
         msg2=room.host.username
-    context ={'users':users, 'rooms':rooms, 'room_msg': room_msg, 'msgz':msgz, 'msg2':msg2}
+    context ={'users':users, 'rooms':rooms, 'room_message': room_message, 'msgz':msgz, 'msg2':msg2, 'topics':topics}
     return render(request, 'chat/profile.html', context)
-
 
 
 # room with ID function
@@ -158,7 +159,7 @@ def DeleteRoom(request,pk):
         messages.error(request, 'Sorry, You are not permited to delete this room')
         print(referrer)
         return HttpResponseRedirect(referrer)
-    if request.User.is_superuser == True:
+    if request.user.is_superuser == True:
         if request.method == 'POST':
             room.delete()
             return redirect ('home')
