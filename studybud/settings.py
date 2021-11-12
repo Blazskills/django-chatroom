@@ -138,24 +138,15 @@ USE_TZ = True
 # STATIC_ROOT = BASE_DIR / 'static'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 # django_on_heroku.settings(locals())
 
 
 # tope added
-
-STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 MEDIA_URL = '/images/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
-
-# MEDIA_ROOT = BASE_DIR / 'static/images'
-
-
-
-
-
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'static/images')
 
 
