@@ -1,14 +1,12 @@
 from django import forms
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from .models import Message, Room, Topic
-from .forms import MessageForm, RoomForm, UserForm
+from .models import Message, Room, Topic , User
+from .forms import MessageForm, MyUserCreationForm, RoomForm, UserForm, UserCreationForm
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
 
 # login function
 
@@ -18,11 +16,11 @@ def loginPage(request):
     if request.user.is_authenticated:
         return redirect("home")
     if request.method == "POST":
-        username = request.POST.get("username").lower()
+        email = request.POST.get("email")
         password = request.POST.get("password")
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, email=email, password=password)
         if user is not None:
-            userconfirm = User.objects.get(username=username)
+            userconfirm = User.objects.get(email=email)
             login(request, userconfirm)
             print(userconfirm.email)
             return redirect("home")
@@ -36,14 +34,11 @@ def loginPage(request):
 
 
 def RegisterPage(request):
-    form = UserCreationForm()
+    form = MyUserCreationForm()
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = MyUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            # if User.objects.get(username = user.username):
-            #     messages.error(request, 'Username already exist')
-            #     print('Username already exist')
             user.username = user.username.lower()
             user.save()
             login(request, user)
@@ -270,7 +265,7 @@ def UpdateUser(request):
     user = request.user
     form = UserForm(instance=user)
     if request.method == "POST":
-        form = UserForm(request.POST, instance=user)
+        form = UserForm(request.POST, request.FILES,instance=user)
         if form.is_valid():
             form.save()
             return redirect("profile-page", pk=user.id)
