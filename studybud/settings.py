@@ -8,8 +8,7 @@ from pathlib import Path
 
 
 
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# tope added
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -46,7 +45,9 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    # tope added
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    # tope added
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -85,6 +86,8 @@ WSGI_APPLICATION = "studybud.wsgi.application"
 #     }
 # }
 
+
+# tope added
 
 DATABASES = {
     "default": {
@@ -136,22 +139,13 @@ USE_TZ = True
 
 
 # tope added
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-# django_on_heroku.settings(locals())
-
-
-# tope added
-
 MEDIA_URL = '/images/'
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'static/images')
-
-
-# django_heroku.settings(locals())
 
 
 
