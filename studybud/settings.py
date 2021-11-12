@@ -136,7 +136,7 @@ USE_TZ = True
 
 
 # tope added
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'static'
 # STATIC_ROOT =   os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
 django_on_heroku.settings(locals())
