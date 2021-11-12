@@ -2,7 +2,7 @@
 
 import os
 from pathlib import Path
-import django_heroku
+import django_on_heroku
 
 
 
@@ -136,11 +136,13 @@ USE_TZ = True
 
 STATIC_ROOT =   os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
-django_heroku.settings(locals())
+django_on_heroku.settings(locals())
 
 
 # tope added
-STATICFILES_DIRS = os.path.join(BASE_DIR,  "static")
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
 MEDIA_URL = '/images/'
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'static/images')
 
