@@ -22,7 +22,7 @@ SECRET_KEY = "django-insecure-mdz(bg&c)k!b9+f11pqviuptj!y++(yic4362qbt^3ttpqz1fm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://studyblogroom.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
