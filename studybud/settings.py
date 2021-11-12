@@ -163,6 +163,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # tope added
 CORS_ALLOW_ALL_ORIGINS = True
-
-
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
